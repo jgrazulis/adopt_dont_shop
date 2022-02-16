@@ -49,4 +49,12 @@ RSpec.describe 'application show page' do
     expect(page).to have_content(@mia.name)
     expect(page).to_not have_content(@leo.name)
   end
+
+  scenario 'visitor can search part of pet name and will get results' do
+    fill_in('query', with: 'MIA')
+    click_button('Search')
+
+    expect(page).to have_content(@mia.name)
+    expect(page).to_not have_content(@leo.name)
+  end
 end
