@@ -23,7 +23,7 @@ class ApplicationsController < ApplicationController
       state: params[:state],
       zip_code: params[:zip_code],
       description: params[:description],
-      status: params[:status]
+      # status: params[:status]
     )
     if @application.save
       redirect_to "/applications/#{@application.id}"
