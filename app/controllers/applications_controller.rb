@@ -5,7 +5,7 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-    if params[:query] != nil
+    if params[:query].present?
       @found_pets = Pet.search(params[:query])
     else
       @found_pets = []
@@ -32,4 +32,11 @@ class ApplicationsController < ApplicationController
       flash[:alert] = "Error: Please complete all fields"
     end
   end 
+
+  def update
+    @application = Application.find(params[:id])
+    @new_pet = Pet.find(params[:search])
+    @pet_application = PetApplication.create!(pet: @new_pet, application: @application)
+    redirect_to "/applications/#{@application.id}"
+  end
 end
