@@ -7,9 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 scranton = Shelter.create!(name: "Scranton Animal Shelter", city: "Scranton, PA", foster_program: false, rank: 9)
+denver = Shelter.create!(name: "Denver Animal Shelter", city: "Denver, CO", foster_program: false, rank: 9)
 
 bob = Application.create!(name: "Bob Vance", street_address: "1234 Dunder Ave", city: "Scranton", state: "PA", zip_code: "18508" , description: "Phyllis and I love dogs, want one", status: 1)
+jess = Application.create!(name: "Jess G", street_address: "5432 Marion Blvd", city: "Denver", state: "CO", zip_code: "80210" , description: "I love dogs, want one", status: 0)
     
-mia = bob.pets.create!(name: "Mia", age: 4, breed: "American Bulldog", adoptable: true, shelter_id: scranton.id)
+mia = Pet.create!(name: "Mia", age: 4, breed: "American Bulldog", adoptable: true, shelter_id: denver.id)
 leo = Pet.create!(name: "Leo", age: 2, breed: "Tabby", adoptable: true, shelter_id: scranton.id)
+maggie = Pet.create!(name: "Margaret Thatcher", age: 5, breed: "Golden Retriever", adoptable: true, shelter_id: denver.id)
+
+pet_application1 = PetApplication.create!(pet: mia, application: jess)
+pet_application2 = PetApplication.create!(pet: leo, application: bob)
 
