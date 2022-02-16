@@ -15,6 +15,10 @@ class Shelter < ApplicationRecord
       .group("shelters.id")
       .order("pets_count DESC")
   end
+  
+  def self.shelters_with_pending_apps
+    Shelter.joins(pets: [:pet_applications, :applications]).where(applications: {status: 1})
+  end
 
   def pet_count
     pets.count
@@ -31,4 +35,5 @@ class Shelter < ApplicationRecord
   def shelter_pets_filtered_by_age(age_filter)
     adoptable_pets.where('age >= ?', age_filter)
   end
+
 end

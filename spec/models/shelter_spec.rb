@@ -30,6 +30,12 @@ RSpec.describe Shelter, type: :model do
       end
     end
 
+    describe '#shelters_with_pending_apps' do
+      it 'displays shelters that have pet applications whose status is pending' do
+        expect(Shelter.shelters_with_pending_apps).to eq([])
+      end
+    end
+
     describe '#order_by_recently_created' do
       it 'returns shelters with the most recently created first' do
         expect(Shelter.order_by_recently_created).to eq([@shelter_3, @shelter_2, @shelter_1])
