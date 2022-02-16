@@ -16,6 +16,6 @@ RSpec.describe Application, type: :model do
   end
 
   describe 'ennumerator' do
-    it { should define_enum_for(:status).with_values(["in progress", :pending, :accepted, :rejected])}
+    it { should define_enum_for(:status).with_values([:in_progress, :pending, :accepted, :rejected])}
   end
 end

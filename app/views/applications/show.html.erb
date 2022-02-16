@@ -12,15 +12,28 @@
   <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
 <% end  %>
 
-<div id="add-pet-to-application">
-<h2> Add a Pet to this Application </h2>
-  <%= form_with url: "/applications/#{@application.id}?query=search",  method: :get, local: true do |form| %>
-    <%= form.label :query %>
-    <%= form.text_field :query %>
-    <%= form.submit "Search" %>
-  <% end %>
-  <% @found_pets.each do |pet| %>
-    <h3><%= pet.name %></h3>
-    <h3><%= link_to "Adopt #{pet.name}", "/applications/#{@application.id}?search=#{pet.id}", method: :patch %></h3>
-  <% end %>
+<% if @application.status == 'in_progress' %>
+  <div id="add-pet-to-application">
+    <h2> Add a Pet to this Application </h2>
+      <%= form_with url: "/applications/#{@application.id}?query=search",  method: :get, local: true do |form| %>
+        <%= form.label :query %>
+        <%= form.text_field :query %>
+        <%= form.submit "Search" %>
+      <% end %>
+      <% @found_pets.each do |pet| %>
+        <h3><%= pet.name %></h3>
+        <h3><%= link_to "Adopt #{pet.name}", "/applications/#{@application.id}?search=#{pet.id}", method: :patch %></h3>
+      <% end %>
   </div>
+
+  <% if @application.pets.count > 0 %>
+    <div id="submit-application">
+      <%= form_with url: "/applications/#{@application.id}?add=description", method: :patch do |form| %>
+        <%= form.label :description, "enter a description" %>
+        <%= form.text_field :description %>
+        <%= form.hidden_field :status, :value => :pending %>
+        <%= form.submit "Submit Application" %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
