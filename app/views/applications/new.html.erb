@@ -1,4 +1,4 @@
-<%= form_with url: "/applications/:id}", method: :get do |form| %>
+<%= form_with url: '/applications', method: :post, local: true do |form| %>
 <%= form.label :name %>
 <%= form.text_field :name %>
 <%= form.label :street_address %>
@@ -9,5 +9,7 @@
 <%= form.text_field :state %>
 <%= form.label :zip_code %>
 <%= form.text_field :zip_code %>
+<%= form.hidden_field :description, :value => "TBD" %>
+<%= form.hidden_field :status, :value => "in progress" %>
 <%= form.submit 'Submit' %>
 <% end %>
