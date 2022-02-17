@@ -34,9 +34,9 @@ class ApplicationsController < ApplicationController
   end 
 
   def update
-    if params[:search] != nil
+    if params[:query] != nil
       @application = Application.find(params[:id])
-      @new_pet = Pet.find(params[:search])
+      @new_pet = Pet.search(params[:query])
       @pet_application = PetApplication.create!(pet: @new_pet, application: @application, status: :accepted )
       redirect_to "/applications/#{@application.id}"
     elsif params[:description] !=nil
